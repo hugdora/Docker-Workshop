@@ -1,0 +1,151 @@
+# Containerize an Application
+
+For the rest of this guide, you'll be working with a simple todo list manager that runs on Node.js. If you're not familiar with Node.js, don't worry — this guide doesn't require any prior experience with JavaScript.
+
+---
+
+## Prerequisites
+
+- Install the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- Install a [Git client](https://git-scm.com/downloads)
+- Use an IDE or text editor (recommended: [Visual Studio Code](https://code.visualstudio.com/))
+
+---
+
+## Get the App
+
+Before running the application, you need to download the source code.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/docker/getting-started-app.git
+````
+
+### 2. View project structure
+
+```text
+getting-started-app/
+├── .dockerignore
+├── package.json
+├── package-lock.json
+├── README.md
+├── spec/
+├── src/
+```
+
+---
+
+## Build the App Image
+
+A **Dockerfile** is a script that contains instructions to build a Docker image.
+
+### 1. Create a Dockerfile
+
+Inside the `getting-started-app` directory, create a file named `Dockerfile`:
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM node:24-alpine
+WORKDIR /app
+COPY . .
+RUN npm install --omit=dev
+CMD ["node", "src/index.js"]
+EXPOSE 3000
+```
+
+### What this Dockerfile does:
+
+* Uses a lightweight Node.js base image (`node:24-alpine`)
+* Sets `/app` as the working directory
+* Copies all project files into the container
+* Installs dependencies
+* Starts the app using Node.js
+* Exposes port `3000`
+
+---
+
+### 2. Build the Docker image
+
+```bash
+cd /path/to/getting-started-app
+docker build -t getting-started .
+```
+
+#### Notes:
+
+* `-t getting-started` → names your image
+* `.` → tells Docker to use the current directory
+* Docker downloads base image layers automatically if not present
+
+---
+
+## Start the Application Container
+
+Run the app inside a container:
+
+```bash
+docker run -d -p 127.0.0.1:3000:3000 getting-started
+```
+
+### Flags explained:
+
+* `-d` → runs container in background (detached mode)
+* `-p` → maps ports (`HOST:CONTAINER`)
+
+  * `127.0.0.1:3000` → your local machine
+  * `3000` → container port
+
+---
+
+## Open the App
+
+Visit:
+
+👉 [http://localhost:3000](http://localhost:3000)
+
+You should see the todo list application running.
+
+---
+## Verify Running Containers
+
+### Using CLI:
+
+```bash
+docker ps
+```
+
+Example output:
+
+```text
+CONTAINER ID   IMAGE              COMMAND                  CREATED         STATUS         PORTS                      NAMES
+df784548666d   getting-started    "docker-entrypoint..."   2 minutes ago   Up 2 minutes   127.0.0.1:3000->3000/tcp   priceless_mcclintock
+```
+
+### Using Docker Desktop:
+
+* Open Docker Desktop
+* Go to the **Containers** tab
+* You’ll see your running container
+
+---
+## Summary
+
+I have:
+
+* Created a Dockerfile
+* Built a Docker image
+* Run a container
+* Accessed your application in the browser
+
+---
+## Related Documentation
+
+* [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
+* [Docker CLI Reference](https://docs.docker.com/engine/reference/commandline/docker/)
+
+---
+
+
+
