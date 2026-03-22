@@ -1,6 +1,3 @@
-Here’s your content cleaned up and formatted as a **GitHub-ready Markdown (`README.md`) file**:
-
-````markdown
 # Containerize an Application
 
 For the rest of this guide, you'll be working with a simple todo list manager that runs on Node.js. If you're not familiar with Node.js, don't worry — this guide doesn't require any prior experience with JavaScript.
@@ -111,7 +108,6 @@ Visit:
 You should see the todo list application running.
 
 ---
-
 ## Verify Running Containers
 
 ### Using CLI:
@@ -134,10 +130,9 @@ df784548666d   getting-started    "docker-entrypoint..."   2 minutes ago   Up 2 
 * You’ll see your running container
 
 ---
-
 ## Summary
 
-You have:
+I have:
 
 * Created a Dockerfile
 * Built a Docker image
@@ -145,7 +140,6 @@ You have:
 * Accessed your application in the browser
 
 ---
-
 ## Related Documentation
 
 * [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
@@ -153,18 +147,7 @@ You have:
 
 ---
 
-## Next Steps
-
-Next, you will modify your application and learn how to update it using a new Docker image.
-
-👉 [Update the application](https://docs.docker.com/get-started/workshop/02_our_app/03_updating_app/)
 
 ```
 
----
 
-If you want, I can also:
-- split this into multiple docs (like `/docs` structure)
-- add badges (build status, Docker pulls, etc.)
-- or generate a full GitHub repo scaffold with `.gitignore`, CI, etc.
-```
