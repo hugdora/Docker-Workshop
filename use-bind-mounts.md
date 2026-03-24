@@ -152,8 +152,9 @@ Update this line:
 Save file
 <img width="2315" height="507" alt="image" src="https://github.com/user-attachments/assets/1a08e53b-741c-4d4d-b060-2ed73fd98d01" />
 <img width="2357" height="507" alt="image" src="https://github.com/user-attachments/assets/a99e3425-a156-4a2e-a79c-f1bcaf80af82" />
-> 👉 Refresh browser → change appears instantly
-> 👉 Nodemon restarts automatically
+
+> 👉 Refresh browser → change appears instantly, Nodemon restarts automatically
+
 <img width="2415" height="442" alt="image" src="https://github.com/user-attachments/assets/fe848b68-9059-44b7-b4e6-1f4c73e51721" />
 
 ## 📌 Summary
