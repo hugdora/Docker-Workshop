@@ -258,15 +258,8 @@ I now have:
  - [docker CLI reference](/reference/cli/docker/)
  - [Networking overview](/engine/network/)
 
-## Next steps
+## ➡️ Next Steps
 
-There's a good chance you are starting to feel a little overwhelmed with everything you need to do to start up
-this application. You have to create a network, start containers, specify all of the environment variables, expose
-ports, and more. That's a lot to remember and it's certainly making things harder to pass along to someone else.
-
-In the next section, you'll learn about Docker Compose. With Docker Compose, you can share your application stacks in a
-much easier way and let others spin them up with a single, simple command.
-
-[Use Docker Compose](/get-started/workshop/07_multi_container/08_using_compose/)
+👉 [Use Docker Compose](./use-docker-compose.md)
 
 
