@@ -100,26 +100,19 @@ docker run -dp 127.0.0.1:3000:3000 `
   node:24-alpine `
   sh -c "npm install && npm run dev"
 ```
-## 💡 What this command does
+<img width="2507" height="577" alt="image" src="https://github.com/user-attachments/assets/ef31b052-704c-4961-ab8b-5fd917ac5203" />
 
-```bash
-docker run -dp 127.0.0.1:3000:3000 \
-  -w /app \
-  --mount type=bind,src=.,target=/app \
-  node:24-alpine \
-  sh -c "npm install && npm run dev"
-```
-## 🔍 Breakdown
+## 💡 What this command does? Here is the breakdown:
 
 - `-dp 127.0.0.1:3000:3000`  
-  → Runs the container in **detached mode** (background) and maps port **3000** from the container to your local machine.
+  → Runs the container in **detached mode** (background) and maps port **3000** from the container to the local machine.
 
 - `-w /app`  
   → Sets the **working directory** inside the container to `/app`.
 
 - `--mount type=bind,src=.,target=/app`  
-  → Creates a **bind mount**, linking your current local folder (`.`) to `/app` inside the container.  
-  → Any changes you make locally are reflected instantly in the container.
+  → Creates a **bind mount**, linking to current local folder (`.`) to `/app` inside the container.  
+  → Any changes make locally are reflected instantly in the container.
 
 - `node:24-alpine`  
   → Specifies the **base image** used to run the container (lightweight Node.js environment).
@@ -135,6 +128,7 @@ docker run -dp 127.0.0.1:3000:3000 \
 docker logs -f <container-id>
 
 ```
+<img width="2505" height="465" alt="image" src="https://github.com/user-attachments/assets/f983996f-6920-411c-938b-4a2a4f9f065d" />
 
 ## ✅ Expected Output
 
