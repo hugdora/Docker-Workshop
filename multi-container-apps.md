@@ -148,44 +148,37 @@ lot of tools that are useful for troubleshooting or debugging networking issues.
 
 <img width="1932" height="817" alt="image" src="https://github.com/user-attachments/assets/08652741-96bb-4996-b749-9d2e5ad3eaf5" />
 
-
-
    In the "ANSWER SECTION", see an `A` record for `mysql` that resolves to `172.23.0.2`
    While `mysql` isn't normally a valid hostname,
    Docker was able to resolve it to the IP address of the container that had that network alias.
    Remember, `--network-alias` was uesd earlier.
-
-   > It is mean that app only simply needs to connect to a host named `mysql` and it'll talk to the
-   database.
+   
+> 💡 This means: Containers can communicate using hostname (mysql) instead of IP
 
 ## Run the app with MySQL
 
-The todo app supports the setting of a few environment variables to specify MySQL connection settings. They are:
+### Environment variables used:
 
 - `MYSQL_HOST` - the hostname for the running MySQL server
 - `MYSQL_USER` - the username to use for the connection
 - `MYSQL_PASSWORD` - the password to use for the connection
 - `MYSQL_DB` - the database to use once connected
 
-> [!NOTE]
->
-> While using env vars to set connection settings is generally accepted for development, it's highly discouraged
-> when running applications in production. Diogo Monica, a former lead of security at Docker,
-> [wrote a fantastic blog post](https://blog.diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/)
-> explaining why.
->
-> A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases,
-> these secrets are mounted as files in the running container. You'll see many apps (including the MySQL image and the todo app)
-> also support env vars with a `_FILE` suffix to point to a file containing the variable.
->
-> As an example, setting the `MYSQL_PASSWORD_FILE` var will cause the app to use the contents of the referenced file
-> as the connection password. Docker doesn't do anything to support these env vars. Your app will need to know to look for
-> the variable and get the file contents.
+> ⚠️ Important
 
-You can now start your dev-ready container.
+Before running:
 
-1. Specify each of the previous environment variables, as well as connect the container to your app network. Make sure that you are in the `getting-started-app` directory when you run this command.
+```docker ps
+```
+<img width="2530" height="270" alt="image" src="https://github.com/user-attachments/assets/85be4e0a-2236-4507-bbee-e69f1caca90b" />
 
+Remove any container using port 3000:
+
+docker rm -f <container-id>
+<img width="2505" height="352" alt="image" src="https://github.com/user-attachments/assets/3ef0a50c-2575-48a0-bef3-8e1de2268156" />
+
+
+### Start the app container
  
    **PowerShell**
    In Windows, run this command in PowerShell.
@@ -200,9 +193,14 @@ You can now start your dev-ready container.
      -e MYSQL_DB=todos `
      node:24-alpine `
      sh -c "npm install && npm run dev"
-   ``` 
-2. If you look at the logs for the container (`docker logs -f <container-id>`), you should see a message similar to the following, which indicates it's
-   using the mysql database.
+   ```
+<img width="2485" height="550" alt="image" src="https://github.com/user-attachments/assets/37bd18b6-5e8e-42ba-b694-ff164ad0c7bb" />
+
+### Verify Connection
+```
+docker logs -f <container-id>
+```
+Expected outcome
 
    ```console
    [nodemon] 3.1.11
@@ -215,10 +213,18 @@ You can now start your dev-ready container.
    Connected to mysql db at host mysql
    Listening on port 3000
    ```
+<img width="2480" height="1470" alt="image" src="https://github.com/user-attachments/assets/262b406e-6ea1-491b-ba12-82d64992e53d" />
 
-3. Open the app in your browser and add a few items to your todo list.
+### Test in Browser
+```
+http://localhost:3000
+```
+Add some todo item
+<img width="2487" height="442" alt="image" src="https://github.com/user-attachments/assets/5755b61e-48b5-46e8-b9ab-284ea564c441" />
+<img width="2425" height="925" alt="image" src="https://github.com/user-attachments/assets/a16b809b-85e5-4fa1-afc9-249836f9a08a" />
 
-4. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
+### Verify Data in MySQL
+ Connect to the mysql database and prove that the items are being written to the database. Remember, the password
    is `secret`.
 
    ```console
@@ -236,15 +242,19 @@ You can now start your dev-ready container.
    | 2912a79e-8486-4bc3-a4c5-460793a575ab | Be awesome!        |         0 |
    +--------------------------------------+--------------------+-----------+
    ```
-
-   Your table will look different because it has your items. But, you should see them stored there.
-
+<img width="2512" height="1442" alt="image" src="https://github.com/user-attachments/assets/ca2db03d-af62-4065-ae7f-4646036cdade" />
+   
 ## Summary
 
-At this point, you have an application that now stores its data in an external database running in a separate
-container. You learned a little bit about container networking and service discovery using DNS.
+I now have:
 
-Related information:
+🐳 App running in one container
+🗄️ MySQL running in another container
+🔗 Communication via Docker network
+💾 Data persisted in MySQL
+
+## Related information:
+
  - [docker CLI reference](/reference/cli/docker/)
  - [Networking overview](/engine/network/)
 
