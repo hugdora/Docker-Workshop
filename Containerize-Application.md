@@ -163,4 +163,7 @@ I have:
 ---
 
 
+## ➡️ Next Steps
+
+👉 [Update the Application](./Update-the-Application.md)
 
