@@ -165,5 +165,5 @@ I have:
 
 ## ➡️ Next Steps
 
-👉 [Update the Application](./Update-the-Application.md)
+👉 [Update the Application](./update-application.md)
 
