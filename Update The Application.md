@@ -141,9 +141,8 @@ In this section, I:
 
 [Docker CLI Reference](https://docs.docker.com/engine/reference/commandline/docker/)
 
-### ➡️ Next Steps
-```
-👉 Share the Application
-```
+## ➡️ Next Steps
+
+👉 [Share the Application](./share-the-application.md)
 
 
