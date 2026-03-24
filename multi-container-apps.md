@@ -36,7 +36,7 @@ There are two ways to put a container on a network:
  - Assign the network when starting the container.
  - Connect an already running container to a network.
 
-In the following steps, you'll create the network first and then attach the MySQL container at startup.
+In the following steps, I'll create the network first and then attach the MySQL container at startup.
 
 ### 1. Create the network.
 
@@ -103,28 +103,29 @@ Expected: `todos` database
 <img width="1955" height="137" alt="image" src="https://github.com/user-attachments/assets/515335b9-6947-4562-80af-d2da5b6e0ca4" />
 
    ---
-## Connect to MySQL
+   
+## Test Container Networking
 
-Now that you know MySQL is up and running, you can use it. But, how do you use it? If you run
-another container on the same network, how do you find the container? Remember that each container has its own IP address.
-
-To answer the questions above and better understand container networking, you're going to make use of the [nicolaka/netshoot](https://github.com/nicolaka/netshoot) container,
-which ships with a lot of tools that are useful for troubleshooting or debugging networking issues.
+Now, MySQL is up and running, I can use it. I will run another container on the same network
+by using of the [nicolaka/netshoot](https://github.com/nicolaka/netshoot) container, which ships with a 
+lot of tools that are useful for troubleshooting or debugging networking issues.
 
 1. Start a new container using the nicolaka/netshoot image. Make sure to connect it to the same network.
 
    ```console
    $ docker run -it --network todo-app nicolaka/netshoot
    ```
+ <img width="2485" height="1347" alt="image" src="https://github.com/user-attachments/assets/1007c3ad-3f9d-4c1e-a109-d955cd3098aa" />
 
-2. Inside the container, you're going to use the `dig` command, which is a useful DNS tool. You're going to look up
-   the IP address for the hostname `mysql`.
+
+2. Inside the container, use the `dig` command, which is a useful DNS tool.
+   > look up the IP address for the hostname `mysql`.
 
    ```console
    $ dig mysql
    ```
 
-   You should get output like the following.
+   > get output like the following.
 
    ```text
    ; <<>> DiG 9.18.8 <<>> mysql
@@ -145,15 +146,19 @@ which ships with a lot of tools that are useful for troubleshooting or debugging
    ;; MSG SIZE  rcvd: 44
    ```
 
-   In the "ANSWER SECTION", you will see an `A` record for `mysql` that resolves to `172.23.0.2`
-   (your IP address will most likely have a different value). While `mysql` isn't normally a valid hostname,
-   Docker was able to resolve it to the IP address of the container that had that network alias. Remember, you used the
-   `--network-alias` earlier.
+<img width="1932" height="817" alt="image" src="https://github.com/user-attachments/assets/08652741-96bb-4996-b749-9d2e5ad3eaf5" />
 
-   What this means is that your app only simply needs to connect to a host named `mysql` and it'll talk to the
+
+
+   In the "ANSWER SECTION", see an `A` record for `mysql` that resolves to `172.23.0.2`
+   While `mysql` isn't normally a valid hostname,
+   Docker was able to resolve it to the IP address of the container that had that network alias.
+   Remember, `--network-alias` was uesd earlier.
+
+   > It is mean that app only simply needs to connect to a host named `mysql` and it'll talk to the
    database.
 
-## Run your app with MySQL
+## Run the app with MySQL
 
 The todo app supports the setting of a few environment variables to specify MySQL connection settings. They are:
 
@@ -181,25 +186,8 @@ You can now start your dev-ready container.
 
 1. Specify each of the previous environment variables, as well as connect the container to your app network. Make sure that you are in the `getting-started-app` directory when you run this command.
 
-   **Mac / Linux**
-
-
-
-   ```console
-   $ docker run -dp 127.0.0.1:3000:3000 \
-     -w /app -v ".:/app" \
-     --network todo-app \
-     -e MYSQL_HOST=mysql \
-     -e MYSQL_USER=root \
-     -e MYSQL_PASSWORD=secret \
-     -e MYSQL_DB=todos \
-     node:24-alpine \
-     sh -c "npm install && npm run dev"
-   ```
-   
+ 
    **PowerShell**
-
-
    In Windows, run this command in PowerShell.
 
    ```powershell
@@ -212,43 +200,7 @@ You can now start your dev-ready container.
      -e MYSQL_DB=todos `
      node:24-alpine `
      sh -c "npm install && npm run dev"
-   ```
-
-   **Command Prompt**
-
-
-   In Windows, run this command in Command Prompt.
-
-   ```console
-   $ docker run -dp 127.0.0.1:3000:3000 ^
-     -w /app -v "%cd%:/app" ^
-     --network todo-app ^
-     -e MYSQL_HOST=mysql ^
-     -e MYSQL_USER=root ^
-     -e MYSQL_PASSWORD=secret ^
-     -e MYSQL_DB=todos ^
-     node:24-alpine ^
-     sh -c "npm install && npm run dev"
-   ```
-
-   **Git Bash**
-
-
-
-   ```console
-   $ docker run -dp 127.0.0.1:3000:3000 \
-     -w //app -v "/.:/app" \
-     --network todo-app \
-     -e MYSQL_HOST=mysql \
-     -e MYSQL_USER=root \
-     -e MYSQL_PASSWORD=secret \
-     -e MYSQL_DB=todos \
-     node:24-alpine \
-     sh -c "npm install && npm run dev"
-   ```
-   
-   
-
+   ``` 
 2. If you look at the logs for the container (`docker logs -f <container-id>`), you should see a message similar to the following, which indicates it's
    using the mysql database.
 
