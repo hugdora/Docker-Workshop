@@ -63,19 +63,19 @@ But Docker expects:
 MY-USERNAME/getting-started
 ```
 
-🔍 Check my images
+### 🔍 Check my images
 
 ```
 docker image ls
 ```
 <img width="2127" height="330" alt="image" src="https://github.com/user-attachments/assets/c88755ce-b89b-4487-afe2-0ed4eb9970c5" />
 
-🔐 Step 2: Login to Docker Hub
+### 🔐 Step 2: Login to Docker Hub
 docker login
 
 Enter my Docker Hub username and password.
 
-🏷️ Step 3: Tag my image
+### 🏷️ Step 3: Tag my image
 
 Replace MY-USERNAME with my Docker ID:
 
@@ -84,7 +84,7 @@ docker tag getting-started MY-USERNAME/getting-started
 ```
 <img width="2182" height="125" alt="image" src="https://github.com/user-attachments/assets/4ec699d4-d306-410b-9672-05d193ae0e43" />
 
-⬆️ Step 4: Push the image
+### ⬆️ Step 4: Push the image
 ```
 docker push MY-USERNAME/getting-started
 ```
@@ -92,14 +92,14 @@ docker push MY-USERNAME/getting-started
 
 👉 If no tag is specified, Docker uses latest by default.
 
-🌍 Run the Image Anywhere
+## 🌍 Run the Image Anywhere
 
 Now that my image is on Docker Hub, I can run it on any machine.
 
 <img width="3757" height="1740" alt="image" src="https://github.com/user-attachments/assets/c56eb26e-9fc0-46c8-bde1-a60ccdfef493" />
 
-
-📌 Summary
+---
+## 📌 Summary
 
 In this section, I:
 
@@ -108,10 +108,13 @@ In this section, I:
 * Pushed the image to Docker Hub
 * Ran the image from a remote registry
 
-📚 Related Documentation
 
-* Docker CLI Reference
-* Docker Hub Overview
-* Multi-platform Images
+## 📚 Related Documentation
 
-➡️ Next Steps: Persist the DB
+- [Docker CLI Reference](https://docs.docker.com/engine/reference/commandline/docker/)
+- [Docker Hub Overview](https://docs.docker.com/docker-hub/)
+- [Multi-platform Images](https://docs.docker.com/build/building/multi-platform/)
+
+## ➡️ Next Steps
+
+👉 [Persist the DB](./persist-db.md)
