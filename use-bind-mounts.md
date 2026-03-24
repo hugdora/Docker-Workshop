@@ -26,43 +26,63 @@ A bind mount allows us to:
 
 ---
 
-## 🧪 Try Bind Mounts (Hands-on)
+## 🧪 Try Bind Mounts 
 
 ### Step 1: Run a container with a bind mount
-
+Open a terminal and change directory to the getting-started-app directory.
 ```bash
 docker run -it --mount type=bind,src=.,target=/src ubuntu bash
 ```
+<img width="2520" height="180" alt="image" src="https://github.com/user-attachments/assets/bf3b8c80-d11a-48bb-a018-64473016842f" />
+
+
 ### Step 2: Explore the container
 ```
 pwd
 ```
+<img width="1985" height="167" alt="image" src="https://github.com/user-attachments/assets/aa133e44-1257-44c8-beb4-9387e3d7c8da" />
+
 ```
 ls
 ```
+<img width="2117" height="140" alt="image" src="https://github.com/user-attachments/assets/394ef974-95e8-441a-beeb-e94003b1e35b" />
+
 ```
 cd src
 ```
 ```
 ls
 ```
+<img width="2065" height="180" alt="image" src="https://github.com/user-attachments/assets/a870f4ec-85d1-45f3-a6fd-cc5e1a8b9d70" />
 
 > 👉 I should see my project files inside the container.
+
+
 
 ### Step 3: Create a file inside the container
 ```
 touch myfile.txt
 ```
+<img width="2070" height="150" alt="image" src="https://github.com/user-attachments/assets/82c9d05d-4cd7-43c1-a75e-5cf636586efd" />
+
+
 > 👉 Now check my host machine — the file appears instantly 🎉
+<img width="3700" height="1345" alt="image" src="https://github.com/user-attachments/assets/8f6ff338-e459-4715-b9eb-02d4792acf26" />
+
+
 
 ### Step 4: Delete the file from host
 
 > 👉 It disappears inside the container as well.
+<img width="2520" height="1155" alt="image" src="https://github.com/user-attachments/assets/0fc446cb-199d-46e9-a3f3-9bee3226e525" />
+
 
 ### Step 5: Exit container
 ```
 Ctrl + D
 ```
+<img width="2020" height="90" alt="image" src="https://github.com/user-attachments/assets/d941c212-0121-49c6-bd46-1dd044ac7bee" />
+
 ## 🚀 Development with Bind Mounts
 
 Bind mounts are powerful for development because they allow:
@@ -128,7 +148,7 @@ nodemon -L src/index.js
 Using sqlite database at /etc/todos/todo.db
 Listening on port 3000
 ```
-> 👉 When you're done watching the logs, press Ctrl + C to exit.
+> 👉 Press Ctrl + C to exit when completed watching the logs.
 
 ## 🔄 Live Update Example
 Open file:
