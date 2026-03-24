@@ -69,8 +69,6 @@ touch myfile.txt
 > 👉 Now check my host machine — the file appears instantly 🎉
 <img width="3700" height="1345" alt="image" src="https://github.com/user-attachments/assets/8f6ff338-e459-4715-b9eb-02d4792acf26" />
 
-
-
 ### Step 4: Delete the file from host
 
 > 👉 It disappears inside the container as well.
@@ -128,7 +126,8 @@ docker run -dp 127.0.0.1:3000:3000 `
 docker logs -f <container-id>
 
 ```
-<img width="2505" height="465" alt="image" src="https://github.com/user-attachments/assets/f983996f-6920-411c-938b-4a2a4f9f065d" />
+<img width="2430" height="1470" alt="image" src="https://github.com/user-attachments/assets/0372e885-1e4b-4032-a450-a74672ff847f" />
+
 
 ## ✅ Expected Output
 
@@ -151,10 +150,11 @@ Update this line:
 - {submitting ? 'Adding...' : 'Add Item'}
 + {submitting ? 'Adding...' : 'Add'}
 Save file
-
+<img width="2315" height="507" alt="image" src="https://github.com/user-attachments/assets/1a08e53b-741c-4d4d-b060-2ed73fd98d01" />
+<img width="2357" height="507" alt="image" src="https://github.com/user-attachments/assets/a99e3425-a156-4a2e-a79c-f1bcaf80af82" />
 > 👉 Refresh browser → change appears instantly
 > 👉 Nodemon restarts automatically
-
+<img width="2415" height="442" alt="image" src="https://github.com/user-attachments/assets/fe848b68-9059-44b7-b4e6-1f4c73e51721" />
 
 ## 📌 Summary
 
