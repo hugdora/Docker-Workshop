@@ -68,7 +68,7 @@ EXPOSE 3000
 
 > 👉 Problem: Any code change invalidates the cache and forces npm install to run again
 
-### 1. ✅ Optimized Dockerfile
+### 1. ✅ Optimised Dockerfile
 
  `package.json` first, install dependencies, and then copy everything else in.
  
