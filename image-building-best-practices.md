@@ -250,23 +250,28 @@ docker compose logs -f app
 <img width="1837" height="367" alt="image" src="https://github.com/user-attachments/assets/f96c8811-9865-45c1-af8d-6e9fe1e8f3d8" />
 
 ### 4. Open the app
-```
-👉 http://localhost:3000
- 
-```
+
+👉 [http://localhost:3000](http://localhost:3000)
+
+<img width="2437" height="440" alt="image" src="https://github.com/user-attachments/assets/310a9e88-a2ba-404a-86c3-5c671b473ea2" />
+
+
 ## See the app stack in Docker Desktop Dashboard
 
-If you look at the Docker Desktop Dashboard, you'll see that there is a group named **getting-started-app**. This is the project name from Docker
-Compose and used to group the containers together. By default, the project name is simply the name of the directory that the
-`compose.yaml` was located in.
+In Docker Desktop, your containers are grouped under a project name (e.g., `getting-started-app`), which is derived from the folder containing `compose.yaml`.
 
-If you expand the stack, you'll see the two containers you defined in the Compose file. The names are also a little
-more descriptive, as they follow the pattern of `<service-name>-<replica-number>`. So, it's very easy to
-quickly see what container is your app and which container is the mysql database.
+Expanding the project shows your services (`app`, `mysql`). Container names follow the format:
+
+<service-name>-<replica-number> This makes it easy to identify each container.
+
+<img width="3770" height="1940" alt="image" src="https://github.com/user-attachments/assets/89a7b77d-8012-4586-a7a7-8c21931616e6" />
+<img width="3810" height="1795" alt="image" src="https://github.com/user-attachments/assets/7196165b-3212-4e70-aee1-19d5af26f961" />
+
+
 
 ## Tear it all down
 
-When you're ready to tear it all down, simply run `docker compose down` or hit the trash can on the Docker Desktop Dashboard
+ `docker compose down` or hit the trash can on the Docker Desktop Dashboard
 for the entire app. The containers will stop and the network will be removed.
 
 > [!WARNING]
@@ -276,10 +281,16 @@ for the entire app. The containers will stop and the network will be removed.
 >
 > The Docker Desktop Dashboard does not remove volumes when you delete the app stack.
 
+<img width="2317" height="300" alt="image" src="https://github.com/user-attachments/assets/b6fc5474-5167-453b-b570-910e0dc3c494" />
+
+
 ## Summary
 
-In this section, you learned about Docker Compose and how it helps you simplify
-the way you define and share multi-service applications.
+Docker Compose simplifies multi-container applications by:
+
+* Defining services in a single file
+* Automating networking and volumes
+* Making setups reproducible and shareable
 
 ## Related information:
  - [Compose overview](/compose/)
