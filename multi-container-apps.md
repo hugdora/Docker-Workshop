@@ -173,8 +173,9 @@ Before running:
 <img width="2530" height="270" alt="image" src="https://github.com/user-attachments/assets/85be4e0a-2236-4507-bbee-e69f1caca90b" />
 
 Remove any container using port 3000:
-
+```
 docker rm -f <container-id>
+```
 <img width="2505" height="352" alt="image" src="https://github.com/user-attachments/assets/3ef0a50c-2575-48a0-bef3-8e1de2268156" />
 
 
