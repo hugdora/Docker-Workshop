@@ -271,7 +271,7 @@ Expanding the project shows your services (`app`, `mysql`). Container names foll
 
 ## Tear it all down
 
- `docker compose down` or hit the trash can on the Docker Desktop Dashboard
+ Run `docker compose down` or hit the trash can on the Docker Desktop Dashboard
 for the entire app. The containers will stop and the network will be removed.
 
 > [!WARNING]
