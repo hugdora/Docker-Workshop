@@ -26,7 +26,7 @@ In the `getting-started-app` directory, create a file named `compose.yaml`.
 
 ## Define the app service
 
-In [part 6](/get-started/workshop/07_multi_container/), you used the following command to start the application service.
+In [part 6](/get-started/workshop/07_multi_container/), I started the app using a long docker run command. 
 
 ```console
 $ docker run -dp 127.0.0.1:3000:3000 \
@@ -39,10 +39,11 @@ $ docker run -dp 127.0.0.1:3000:3000 \
   node:24-alpine \
   sh -c "npm install && npm run dev"
 ```
+Now, I will translate that into a Compose service
 
-You'll now define this service in the `compose.yaml` file.
+> Open compose.yaml in a text or code editor
 
-1. Open `compose.yaml` in a text or code editor, and start by defining the name and image of the first service (or container) you want to run as part of your application.
+### Step 1: Define the service
    The name will automatically become a network alias, which will be useful when defining your MySQL service.
 
    ```yaml
@@ -51,7 +52,7 @@ You'll now define this service in the `compose.yaml` file.
        image: node:24-alpine
    ```
 
-2. Typically, you will see `command` close to the `image` definition, although there is no requirement on ordering. Add the `command` to your `compose.yaml` file.
+### Step 2: Add the startup command
 
    ```yaml
    services:
@@ -60,7 +61,7 @@ You'll now define this service in the `compose.yaml` file.
        command: sh -c "npm install && npm run dev"
    ```
 
-3. Now migrate the `-p 127.0.0.1:3000:3000` part of the command by defining the `ports` for the service.
+### Step 3: Configure port mapping
 
    ```yaml
    services:
@@ -71,11 +72,9 @@ You'll now define this service in the `compose.yaml` file.
          - 127.0.0.1:3000:3000
    ```
 
-4. Next, migrate both the working directory (`-w /app`) and the volume mapping
-   (`-v ".:/app"`) by using the `working_dir` and `volumes` definitions.
+### Step 4: Set working directory and bind mount
 
-    One advantage of Docker Compose volume definitions is you can use relative paths from the current directory.
-
+   
    ```yaml
    services:
      app:
@@ -88,7 +87,7 @@ You'll now define this service in the `compose.yaml` file.
          - ./:/app
    ```
 
-5. Finally, you need to migrate the environment variable definitions using the `environment` key.
+### Step 5: Add environment variables
 
    ```yaml
    services:
@@ -107,9 +106,9 @@ You'll now define this service in the `compose.yaml` file.
          MYSQL_DB: todos
    ```
 
-### Define the MySQL service
+## Define the MySQL service
 
-Now, it's time to define the MySQL service. The command that you used for that container was the following:
+In the previous section, I started the app using a long docker run command.
 
 ```console
 $ docker run -d \
@@ -119,8 +118,9 @@ $ docker run -d \
   -e MYSQL_DATABASE=todos \
   mysql:8.0
 ```
+Now, you will translate that into a Compose service.
 
-1. First define the new service and name it `mysql` so it automatically gets the network alias. Also specify the image to use as well.
+### Step 1: Add the service
 
    ```yaml
 
@@ -131,12 +131,7 @@ $ docker run -d \
        image: mysql:8.0
    ```
 
-2. Next, define the volume mapping. When you ran the container with `docker
-   run`, Docker created the named volume automatically. However, that doesn't
-   happen when running with Compose. You need to define the volume in the
-   top-level `volumes:` section and then specify the mountpoint in the service
-   config. By simply providing only the volume name, the default options are
-   used.
+### Step 2: Configure volume
 
    ```yaml
    services:
@@ -150,8 +145,7 @@ $ docker run -d \
    volumes:
      todo-mysql-data:
    ```
-
-3. Finally, you need to specify the environment variables.
+### Step 3: Add environment variables
 
    ```yaml
    services:
@@ -169,7 +163,7 @@ $ docker run -d \
      todo-mysql-data:
    ```
 
-At this point, your complete `compose.yaml` should look like this:
+### Final complete `compose.yaml` should look like this:
 
 
 ```yaml
@@ -199,21 +193,29 @@ services:
 volumes:
   todo-mysql-data:
 ```
+> Save it
+<img width="2430" height="1460" alt="image" src="https://github.com/user-attachments/assets/765275b4-c346-405c-84eb-cd159bee1e9e" />
 
 ## Run the application stack
 
-Now that you have your `compose.yaml` file, you can start your application.
+### 1. Clean up existing containers
 
-1. Make sure no other copies of the containers are running first. Use `docker ps` to list the containers and `docker rm -f <ids>` to remove them.
+```
+docker ps
+```
+<img width="2235" height="170" alt="image" src="https://github.com/user-attachments/assets/2239496b-8ca7-4ad5-b8c7-375a54ad1f6b" />
 
-2. Start up the application stack using the `docker compose up` command. Add the
-   `-d` flag to run everything in the background.
+```
+docker rm -f <container-id>
+```
+
+### 2. Start the stack
+    Add the  `-d` flag to run everything in the background.
 
    ```console
    $ docker compose up -d
    ```
-
-    When you run the previous command, you should see output like the following:
+  > Expected output:
 
    ```plaintext
    Creating network "app_default" with the default driver
@@ -221,15 +223,15 @@ Now that you have your `compose.yaml` file, you can start your application.
    Creating app_app_1   ... done
    Creating app_mysql_1 ... done
    ```
+<img width="2385" height="452" alt="image" src="https://github.com/user-attachments/assets/b837e698-a8e0-4bfc-9058-c9ac9e345b11" />
 
-    You'll notice that Docker Compose created the volume as well as a network. By default, Docker Compose automatically creates a network specifically for the application stack (which is why you didn't define one in the Compose file).
+### 3. View logs
 
-3. Look at the logs using the `docker compose logs -f` command. You'll see the logs from each of the services interleaved
-    into a single stream. This is incredibly useful when you want to watch for timing-related issues. The `-f` flag follows the
-    log, so will give you live output as it's generated.
-
-    If you have run the command already, you'll see output that looks like this:
-
+```
+docker compose logs -f
+```
+> Expected output
+  
     ```plaintext
     mysql_1  | 2019-10-03T03:07:16.083639Z 0 [Note] mysqld: ready for connections.
     mysql_1  | Version: '8.0.31'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
@@ -237,12 +239,21 @@ Now that you have your `compose.yaml` file, you can start your application.
     app_1    | Listening on port 3000
     ```
 
-    The service name is displayed at the beginning of the line (often colored) to help distinguish messages. If you want to
-    view the logs for a specific service, you can add the service name to the end of the logs command (for example,
-    `docker compose logs -f app`).
+<img width="2515" height="1085" alt="image" src="https://github.com/user-attachments/assets/b04aaa19-a00a-4208-a3d3-739d26fed312" />
+<img width="2525" height="1122" alt="image" src="https://github.com/user-attachments/assets/cae48289-a7e2-4f4a-b115-c4d8acc322a0" />
 
-4. At this point, you should be able to open your app in your browser on [http://localhost:3000](http://localhost:3000) and see it running.
+To view logs for a specific service:
+```
+docker compose logs -f app
+```
+<img width="2522" height="1120" alt="image" src="https://github.com/user-attachments/assets/edc29bf8-8bfd-4f95-94dd-198de7b69c3e" />
+<img width="1837" height="367" alt="image" src="https://github.com/user-attachments/assets/f96c8811-9865-45c1-af8d-6e9fe1e8f3d8" />
 
+### 4. Open the app
+```
+👉 http://localhost:3000
+ 
+```
 ## See the app stack in Docker Desktop Dashboard
 
 If you look at the Docker Desktop Dashboard, you'll see that there is a group named **getting-started-app**. This is the project name from Docker
