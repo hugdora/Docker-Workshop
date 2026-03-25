@@ -83,6 +83,7 @@ dockerfile
    CMD ["node", "src/index.js"]
 ```
 <img width="1892" height="940" alt="image" src="https://github.com/user-attachments/assets/1873d770-d67e-4f52-9b8b-b932d92b6fb1" />
+
 > 👉 Benefits:
 
 * Dependencies are only reinstalled when package.json changes
