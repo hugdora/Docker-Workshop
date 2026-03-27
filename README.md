@@ -1,5 +1,7 @@
 
 # 📦 Docker Workshop
+<img width="1602" height="1050" alt="image" src="https://github.com/user-attachments/assets/5c4a67bc-843b-450c-a7ef-480c8db348d7" />
+
 
 A hands-on workshop to learn Docker fundamentals, containerization, multi-container applications, and best practices.
 
